@@ -30,3 +30,4 @@
 [Une u konsoltova me koleget e mia per pergjigjet] Shëno çfarë ndihme more dhe çfarë kontrollove vetë, ose shkruaj: Nuk përdora AI.
 
 Hiqi shenjat e plotësimit pasi t'i zëvendësosh me përgjigjet e tua.
+
