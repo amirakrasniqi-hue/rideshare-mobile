@@ -1,8 +1,11 @@
+import Link from "next/link";
 import { KartaUdhetimi } from "@/components/KartaUdhetimi";
-import { lexoUdhetimet } from "@/lib/udhetimet";
+import { lexoUdhetimet, type Udhetim } from "@/lib/udhetimet";
+
+export const dynamic = "force-dynamic";
 
 export default async function Home() {
-  let udhetimet;
+  let udhetimet: Udhetim[];
 
   try {
     udhetimet = await lexoUdhetimet();
@@ -10,6 +13,7 @@ export default async function Home() {
     return (
       <main>
         <h1>RideShare</h1>
+        <p><Link href="/panel">Hyr / Paneli im</Link></p>
         <p role="alert">Nuk u lidhëm me databazën. Provo përsëri.</p>
       </main>
     );
@@ -18,6 +22,8 @@ export default async function Home() {
   return (
     <main>
       <h1>RideShare · Udhëtimet për AAB</h1>
+      <p><Link href="/panel">Hyr / Paneli im</Link></p>
+      <p>Burimi: Neon · të dhëna fiktive për ushtrime</p>
 
       <p>
         Zgjidh një nisje dhe lexo detajet para kërkesës.
