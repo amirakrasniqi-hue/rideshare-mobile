@@ -1,5 +1,5 @@
 import { KartaUdhetimi } from "@/components/KartaUdhetimi";
-import { lexoUdhetimet } from "@/app/lib/udhetimet";
+import { lexoUdhetimet } from "@/lib/udhetimet";
 
 export default async function Home() {
   let udhetimet;

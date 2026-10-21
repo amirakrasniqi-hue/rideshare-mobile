@@ -21,9 +21,12 @@ Ndryshova përkohësisht emrin `DATABASE_URL` në `.env.local` dhe rinisa server
 ## Ku gjendet puna
 
 * `schema.sql` – struktura e databazës.
-* `aplikacioni/app/lib/udhetimet.ts` – funksionet për leximin e udhëtimeve.
+* `aplikacioni/lib/db.ts` – lidhja private me Neon.
+* `aplikacioni/lib/udhetimet.ts` – funksionet për leximin e udhëtimeve.
 * `aplikacioni/app/page.tsx` – lista e udhëtimeve.
 * `aplikacioni/app/udhetimi/[id]/page.tsx` – detajet e udhëtimit.
+* `aplikacioni/app/udhetimi/[id]/kerkesa/page.tsx` – simulimi i kërkesës.
+* `aplikacioni/package.json` dhe `aplikacioni/package-lock.json` – paketat e Neon-it.
 * `.env.local` – është skedar lokal dhe nuk publikohet në GitHub.
 
 **Repository në GitHub:** [https://github.com/amirakrasniqi-hue/rideshare-mobile]

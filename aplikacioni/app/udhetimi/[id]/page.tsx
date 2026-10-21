@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { gjejUdhetimin } from "@/app/lib/udhetimet";
+import { gjejUdhetimin } from "@/lib/udhetimet";
 
 export const dynamic = "force-dynamic";
 

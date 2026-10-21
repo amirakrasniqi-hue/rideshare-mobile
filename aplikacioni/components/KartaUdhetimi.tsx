@@ -1,5 +1,5 @@
 import Link from "next/link";
-import type { Udhetim } from "@/app/lib/udhetimet";
+import type { Udhetim } from "@/lib/udhetimet";
 
 export function KartaUdhetimi({
   udhetim,
