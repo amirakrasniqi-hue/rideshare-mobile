@@ -1,40 +1,35 @@
-import Link from "next/link";
-import { notFound } from "next/navigation";
-import { gjejUdhetimin } from "@/app/lib/udhetimet";
+import { KartaUdhetimi } from "@/components/KartaUdhetimi";
+import { lexoUdhetimet } from "@/app/lib/udhetimet";
 
-export default async function Kerkesa({
-  params,
-}: {
-  params: Promise<{ id: string }>;
-}) {
-  const { id } = await params;
+export default async function Home() {
+  let udhetimet;
 
-  const udhetim = gjejUdhetimin(id);
-
-  if (!udhetim) {
-    notFound();
+  try {
+    udhetimet = await lexoUdhetimet();
+  } catch {
+    return (
+      <main>
+        <h1>RideShare</h1>
+        <p role="alert">
+          Nuk u lidhëm me databazën. Provo përsëri.
+        </p>
+      </main>
+    );
   }
 
   return (
     <main>
-      <Link href={`/udhetimi/${id}`}>
-        ← Kthehu te detajet
-      </Link>
+      <h1>RideShare · Udhëtimet për AAB</h1>
+      <p>Zgjidh një nisje dhe lexo detajet para kërkesës.</p>
 
-      {udhetim.vende > 0 ? (
-        <>
-          <h1>Simulim: Në pritje</h1>
-
-          <p>
-            Kërkesa për {udhetim.nisja} nuk është dërguar te shoferi.
-          </p>
-
-          <p>
-            Ruajtjen dhe konfirmimin real do t’i shtojmë më vonë.
-          </p>
-        </>
+      {udhetimet.length === 0 ? (
+        <p>Nuk ka udhëtime për momentin.</p>
       ) : (
-        <h1>Nuk ka vende të lira.</h1>
+        <div className="trip-list">
+          {udhetimet.map((udhetim) => (
+            <KartaUdhetimi key={udhetim.id} udhetim={udhetim} />
+          ))}
+        </div>
       )}
     </main>
   );
