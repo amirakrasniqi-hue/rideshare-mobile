@@ -12,9 +12,17 @@
 
 Provat u kryen lokalisht me OAuth App-in dhe databazën Neon të projektit.
 
-1. **Sesioni:** Hyrja me GitHub funksionoi; paneli shfaqi profilin dhe rolin `shofer`.
-2. **Ruajtja:** Ora e udhëtimit ID 2 u ndryshua në 08:25 dhe u shfaq në kartën e udhëtimit. Më pas u rikthye në 08:15.
-3. **Refuzimi:** Pas ndryshimit të ID-së së formularit në 1, serveri shfaqi “Nuk ke leje për këtë udhëtim. Ora nuk ndryshoi.” Kontrolli përfundimtar në Neon tregoi ID 1 në 08:00 dhe ID 2 në 08:15.
+### Prova 1 · Sesioni
+
+Hapa `/panel`, u kyça me GitHub dhe rifreskova panelin; emri, ID-ja dhe roli `shofer` u shfaqën pas hyrjes.
+
+### Prova 2 · Ruajtja e lejuar
+
+Vendosa orën 08:25 për udhëtimin ID 2 dhe klikova “Ruaj orën”; aplikacioni shfaqi suksesin dhe karta e udhëtimit tregoi 08:25. Pastaj e riktheva ID 2 në 08:15.
+
+### Prova 3 · Refuzimi i ndryshimit pa pronësi
+
+Në DevTools ndryshova ID-në e fshehur të formularit nga 2 në 1 dhe provova të ruaja 08:25; serveri refuzoi kërkesën me “Nuk ke leje për këtë udhëtim. Ora nuk ndryshoi.” Kontrolli në Neon tregoi ID 1 në 08:00 dhe ID 2 në 08:15.
 
 ## Konfigurimi lokal që kërkohet
 
