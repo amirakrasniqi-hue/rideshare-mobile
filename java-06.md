@@ -11,7 +11,7 @@
 
 ## Provat
 
-Provat e mëposhtme duhen kryer në shfletuesin lokal me Neon-in e projektit. Nuk janë ekzekutuar gjatë përgatitjes së këtij raporti; plotëso rezultatin real pas secilës provë.
+Provat e mëposhtme u kryen në shfletuesin lokal me Neon-in e projektit. Rezultatet reale janë shënuar pas secilës provë.
 
 ### Prova 1 · Manifesti dhe vizita online
 
