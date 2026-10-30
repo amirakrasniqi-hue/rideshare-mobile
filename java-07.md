@@ -31,7 +31,7 @@ Para: https://github.com/amirakrasniqi-hue/rideshare-mobile/commit/d4a90a12aab77
 
 Pas: https://github.com/amirakrasniqi-hue/rideshare-mobile/commit/876b97a55cbfcc23a3646833fc05fd2a19491ad8
 
-### Prova 1 · ID nga lista te detajet
+### Prova 1
 
 Hapat: Hap listën në localhost, kontrollo kartën e parë dhe hap `/udhetimi/1`.
 
@@ -39,7 +39,7 @@ Pritshmëria: Lista tregon ID 1 dhe lidhja hap detajet me ID 1 dhe të njëjtin 
 
 Vëzhgimi: Kaloi. Karta dhe detajet treguan ID 1; të dyja paraqitën Prishtinë – AAB, nisjen 08:00 dhe 2 vende.
 
-### Prova 2 · ID që nuk ekziston
+### Prova 2
 
 Hapat: Hape `http://localhost:3000/udhetimi/999999` dhe kontrollo statusin dhe përmbajtjen e përgjigjes.
 
@@ -47,7 +47,7 @@ Pritshmëria: Kërkesa kthen 404 me mesazhin “Udhëtimi nuk u gjet” dhe lidh
 
 Vëzhgimi: Nuk kaloi plotësisht. U kthye HTTP 404, por përgjigjja e marrë nuk përmbante mesazhin e faqes së posaçme ose lidhjen për listën.
 
-### Prova 3 · Hyrje tjetër, pa vende
+### Prova 3
 
 Hapat: Hape `/udhetimi/3`, udhëtimin tjetër në listë, me 0 vende të lira.
 
