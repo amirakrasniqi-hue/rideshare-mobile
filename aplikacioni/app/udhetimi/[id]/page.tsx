@@ -30,6 +30,7 @@ export default async function Detajet({
   return (
     <main>
       <Link href="/">← Kthehu te lista</Link>
+      <p>ID e udhëtimit: {udhetim.id}</p>
       <h1>
         {udhetim.nisja} – {udhetim.destinacioni}
       </h1>

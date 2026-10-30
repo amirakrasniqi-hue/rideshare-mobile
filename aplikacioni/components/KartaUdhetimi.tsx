@@ -12,6 +12,7 @@ export function KartaUdhetimi({
         {udhetim.nisja} – {udhetim.destinacioni}
       </h2>
 
+      <p>ID e udhëtimit: {udhetim.id}</p>
       <p>
         Ora: {udhetim.ora} · Vende të lira: {udhetim.vende}
       </p>
