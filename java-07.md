@@ -27,25 +27,32 @@ Shtova rreshtin “ID e udhëtimit” në kartën e listës dhe te `aplikacioni/
 
 ## Versionet
 
-Para: https://github.com/amirakrasniqi-hue/rideshare-mobile/commit/d4a90a12aab77ef46559a3dd29c1cdd1e3b9bb1c  
+Para: https://github.com/amirakrasniqi-hue/rideshare-mobile/commit/d4a90a12aab77ef46559a3dd29c1cdd1e3b9bb1c
+
 Pas: https://github.com/amirakrasniqi-hue/rideshare-mobile/commit/876b97a55cbfcc23a3646833fc05fd2a19491ad8
 
 ### Prova 1 · ID nga lista te detajet
 
-Hapat: Hap listën në localhost, kontrollo kartën e parë dhe hap `/udhetimi/1`.  
-Pritshmëria: Lista tregon ID 1 dhe lidhja hap detajet me ID 1 dhe të njëjtin udhëtim.  
+Hapat: Hap listën në localhost, kontrollo kartën e parë dhe hap `/udhetimi/1`.
+
+Pritshmëria: Lista tregon ID 1 dhe lidhja hap detajet me ID 1 dhe të njëjtin udhëtim.
+
 Vëzhgimi: Kaloi. Karta dhe detajet treguan ID 1; të dyja paraqitën Prishtinë – AAB, nisjen 08:00 dhe 2 vende.
 
 ### Prova 2 · ID që nuk ekziston
 
-Hapat: Hape `http://localhost:3000/udhetimi/999999` dhe kontrollo statusin dhe përmbajtjen e përgjigjes.  
-Pritshmëria: Kërkesa kthen 404 me mesazhin “Udhëtimi nuk u gjet” dhe lidhje për t'u kthyer te lista.  
+Hapat: Hape `http://localhost:3000/udhetimi/999999` dhe kontrollo statusin dhe përmbajtjen e përgjigjes.
+
+Pritshmëria: Kërkesa kthen 404 me mesazhin “Udhëtimi nuk u gjet” dhe lidhje për t'u kthyer te lista.
+
 Vëzhgimi: Nuk kaloi plotësisht. U kthye HTTP 404, por përgjigjja e marrë nuk përmbante mesazhin e faqes së posaçme ose lidhjen për listën.
 
 ### Prova 3 · Hyrje tjetër, pa vende
 
-Hapat: Hape `/udhetimi/3`, udhëtimin tjetër në listë, me 0 vende të lira.  
-Pritshmëria: Detajet tregojnë ID 3 dhe 0 vende; nuk ofrohet lidhja “Kërko vend”.  
+Hapat: Hape `/udhetimi/3`, udhëtimin tjetër në listë, me 0 vende të lira.
+
+Pritshmëria: Detajet tregojnë ID 3 dhe 0 vende; nuk ofrohet lidhja “Kërko vend”.
+
 Vëzhgimi: Kaloi. U shfaqën ID 3, Lipjan – AAB, 07:45 dhe 0 vende; në vend të lidhjes u shfaq “Nuk ka vende të lira”.
 
 ## Ndihma nga AI
