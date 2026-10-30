@@ -1,4 +1,6 @@
 import Link from "next/link";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/lib/auth";
 import Hyrja from "@/components/Hyrja";
 import { profiliIm } from "@/lib/lejet";
 import { ruajOren } from "./actions";
@@ -19,25 +21,33 @@ export default async function Panel({
   searchParams: Promise<{ m?: string }>;
 }) {
   const { m } = await searchParams;
-  let p;
-  try {
-    p = await profiliIm();
-  } catch {
-    return (
-      <main className="app-shell">
-        <h1>Paneli im</h1>
-        <p role="alert">{mesazhet.databaza}</p>
-        <Link href="/panel">Provo përsëri</Link>
-      </main>
-    );
+  const session = await getServerSession(authOptions);
+  let p = null;
+  let gabimDatabaze = false;
+
+  if (session) {
+    try {
+      p = await profiliIm();
+    } catch {
+      gabimDatabaze = true;
+    }
   }
 
   return (
     <main className="app-shell">
       <h1>Paneli im</h1>
       {m && mesazhet[m] && <p role="status">{mesazhet[m]}</p>}
+      {gabimDatabaze && (
+        <p role="alert">
+          {mesazhet.databaza} Hyrja me GitHub mbetet aktive; provo sërish më vonë.
+        </p>
+      )}
       {!p ? (
-        <p>Lista është publike. Për panelin hyr me llogarinë tënde GitHub.</p>
+        <p>
+          {session
+            ? `Përshëndetje, ${session.user?.name ?? "përdorues"}. Profili dhe lejet do të ngarkohen kur databaza të jetë e arritshme.`
+            : "Lista është publike. Për panelin hyr me llogarinë tënde GitHub."}
+        </p>
       ) : (
         <>
           <p>
@@ -46,7 +56,7 @@ export default async function Panel({
           <p>ID ime GitHub: <code>{p.id}</code></p>
         </>
       )}
-      <Hyrja brenda={Boolean(p)} />
+      <Hyrja brenda={Boolean(session)} />
       {p?.roli === "shofer" ? (
         <form action={ruajOren}>
           <h2>Ndrysho orën e udhëtimit tim</h2>
