@@ -1,0 +1,11 @@
+{
+  "week": 8,
+  "title": "RideShare pickup location",
+  "testRoute": "/java-08-test",
+  "component": "aplikacioni/components/Vendtakimi.tsx",
+  "testCases": [
+    { "id": "manual-confirmation", "testIds": ["vendtakimi-input", "vendtakimi-konfirmo", "vendtakimi-konfirmuar"] },
+    { "id": "geolocation", "testIds": ["vendtakimi-geolocation", "vendtakimi-mesazhi"] },
+    { "id": "timeout-simulation", "testIds": ["vendtakimi-simulim-timeout", "vendtakimi-mesazhi"] }
+  ]
+}
