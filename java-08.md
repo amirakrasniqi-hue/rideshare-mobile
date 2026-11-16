@@ -32,15 +32,15 @@ Vendtakimi mbahet vetëm në gjendjen React të ekranit dhe humbet pas rifreskim
 
 ## Prova me një hyrje të re
 
-**Hyrja që provova:** Në Firefox hapa `http://127.0.0.1:3000/java-08-test`, shkrova `Biblioteka e AAB-se` në fushën “Shkruaj vendtakimin” dhe klikova “Konfirmo në telefon”.
+**Hyrja që provova:** Në Firefox hapa `http://127.0.0.1:3000/java-08-test`. Fillimisht klikova “Konfirmo në telefon” me fushën bosh. Pastaj shkrova hyrjen e re `Stacioni i Trenit` dhe klikova sërish “Konfirmo në telefon”.
 
-**Parashikimi im para klikimit:** Parashikova se fusha manuale do ta pranonte emrin e vendit dhe pas klikimit do ta shfaqte si vendtakim të konfirmuar në telefon. Prisja që ky veprim të mos kërkonte leje vendndodhjeje dhe vlera të mos dërgohej në server.
+**Parashikimi im para klikimit:** Me fushën bosh prisja paralajmërim që duhet shkruar vendtakimi. Pas shkrimit të `Stacioni i Trenit` prisja që aplikacioni ta shfaqte si vendtakim të konfirmuar. Asnjë nga këto veprime nuk duhej të kërkonte leje vendndodhjeje.
 
-**Çfarë pashë realisht:** Faqja u hap në Firefox. Para veprimit shfaqej “Vendtakimi i konfirmuar: Ende nuk është zgjedhur”. Pas shkrimit dhe klikimit u shfaq “Vendtakimi i konfirmuar: Biblioteka e AAB-se” dhe statusi “Vendtakimi u konfirmua në këtë telefon.” Nuk u shfaq kërkesë për leje, sepse përdora vetëm fushën manuale. Më pas klikova simulimin e timeout-it dhe pashë “Koha mbaroi. Provo sërish ose shkruaj vendtakimin.” Këto janë rezultate të ndërveprimit me komponentin në Firefox headless; nuk provova vendndodhjen/GPS-in.
+**Çfarë pashë realisht:** Para klikimeve ekrani tregoi “Vendtakimi i konfirmuar: Ende nuk është zgjedhur”. Klikimi me fushën bosh shfaqi “Shkruaj vendtakimin para se ta konfirmosh.” Pas shkrimit të `Stacioni i Trenit`, ekrani tregoi “Vendtakimi i konfirmuar: Stacioni i Trenit” dhe statusin “Vendtakimi u konfirmua në këtë telefon.” Nuk u shfaq kërkesë për leje, sepse përdora vetëm fushën manuale. Këto rezultate i pashë gjatë ndërveprimit me komponentin në Firefox headless.
 
 **Skedari dhe funksioni që e shpjegojnë:** `aplikacioni/components/Vendtakimi.tsx`: `konfirmo()` lexon fushën, heq hapësirat në skaje dhe vendos vlerën në state-in lokal; `kurDeshtonLeximi()` trajton timeout-in. `aplikacioni/app/java-08-test/page.tsx` shfaq komponentin me të dhëna fiktive dhe aktivizon butonin e simulimit.
 
-**Çfarë kuptova ose korrigjova:** Konfirmova se vendtakimi manual ruhet në ekran pas klikimit dhe se simulimi i timeout-it jep udhëzim për provë sërish ose shkrim manual. Kjo provë nuk aktivizoi lejen e vendndodhjes, prandaj nuk tregon sjelljen e GPS-it dhe as refuzimin real të lejes. Koordinatat nuk janë emër vendi; përdoruesi duhet ta shkruajë emrin veçmas.
+**Çfarë kuptova ose korrigjova:** Kur fusha është bosh, aplikacioni e ndalon konfirmimin dhe kërkon tekst. Pasi shkrova një hyrje të re, ajo u ruajt si vendtakim i konfirmuar në ekran. Kjo provë kontrolloi hyrjen manuale, jo GPS-in ose refuzimin e lejes.
 
 ## Privatësia dhe kufizimet
 
