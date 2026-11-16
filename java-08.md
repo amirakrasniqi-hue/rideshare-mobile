@@ -20,7 +20,7 @@ Vendtakimi mbahet vetëm në gjendjen React të ekranit dhe humbet pas rifreskim
 
 **Pritshmëria:** Pas refuzimit shfaqet udhëzimi për shkrimin manual. Pas konfirmimit, `Parkingu` paraqitet si vendtakim i zgjedhur në këtë telefon. Simulimi i timeout-it e mbyll gjendjen e pritjes, tregon se koha mbaroi dhe lejon provë të re ose zgjedhje manuale. Butoni simulon `error.code === 3`; ai nuk provon timeout real të pajisjes.
 
-**Vëzhgimi real:** Nuk arrita t’i klikoj këto kontrolle në shfletues për shkak të gabimit të nisjes së shfletuesit headless. Nga leximi i komponentit, refuzimi (`error.code === 1`) vendos mesazhin “Leja u refuzua. Shkruaj vendtakimin vetë.”; konfirmimi ruan tekstin vetëm në state-in lokal, kurse butoni i provës kalon `error.code === 3` dhe çaktivizon pritjen. Këto janë sjellje të verifikuara në kod, jo rezultate të një klikimi real; duhen konfirmuar në pajisje.
+**Vëzhgimi real:** Në Firefox headless në localhost klikova “Simulo përfundimin e kohës”; u shfaq “Koha mbaroi. Provo sërish ose shkruaj vendtakimin.” Gjithashtu shkrova dhe konfirmova `Biblioteka e AAB-se`; ekrani tregoi “Vendtakimi i konfirmuar: Biblioteka e AAB-se” dhe “Vendtakimi u konfirmua në këtë telefon.” Refuzimin real të kërkesës për vendndodhje nuk e provova; pjesa e refuzimit më sipër përshkruan pritshmërinë e bazuar në kod dhe mbetet për provë në shfletues.
 
 ### Prova 3 — Kontrolli i privatësisë
 
@@ -34,23 +34,23 @@ Vendtakimi mbahet vetëm në gjendjen React të ekranit dhe humbet pas rifreskim
 
 ### Hyrja që provova
 
-Hapa rrugën `/java-08-test` në serverin lokal dhe kontrollova faqen fillestare, fushën e zbrazët dhe kontrollet e vendtakimit. Nuk bëra klikim që të dërgojë kërkesë për leje.
+Në Firefox hapa `http://127.0.0.1:3000/java-08-test`, shkrova `Biblioteka e AAB-se` në fushën “Shkruaj vendtakimin” dhe klikova “Konfirmo në telefon”.
 
 ### Parashikimi im para klikimit
 
-Faqja do të hapej pa kërkuar vendndodhje. Vetëm pas klikimit të butonit do të niste kërkesa e shfletuesit. Nëse përdoruesi refuzon, mund të shkruajë një emër vendi dhe ta konfirmojë lokalisht.
+Parashikova se fusha manuale do ta pranonte emrin e vendit dhe pas klikimit do ta shfaqte si vendtakim të konfirmuar në telefon. Prisja që ky veprim të mos kërkonte leje vendndodhjeje dhe vlera të mos dërgohej në server.
 
 ### Çfarë pashë realisht
 
-Kërkesa lokale ktheu `200`; faqja shfaqi udhëtimin fiktiv, fushën manuale dhe dy butonat. Vendtakimi fillestar ishte bosh. Nuk e verifikova në shfletues prompt-in e lejes, pranimin/refuzimin, mesazhin pas klikimit ose konfirmimin e tekstit, sepse Chromium/Edge headless nuk u nisën me sukses në këtë mjedis.
+Faqja u hap në Firefox. Para veprimit shfaqej “Vendtakimi i konfirmuar: Ende nuk është zgjedhur”. Pas shkrimit dhe klikimit u shfaq “Vendtakimi i konfirmuar: Biblioteka e AAB-se” dhe statusi “Vendtakimi u konfirmua në këtë telefon.” Nuk u shfaq kërkesë për leje, sepse përdora vetëm fushën manuale. Më pas klikova simulimin e timeout-it dhe pashë “Koha mbaroi. Provo sërish ose shkruaj vendtakimin.” Këto janë rezultate të ndërveprimit real me komponentin në Firefox headless; nuk provova vendndodhjen/GPS-in.
 
 ### Skedari dhe funksioni që e shpjegojnë
 
-`aplikacioni/components/Vendtakimi.tsx`: `perdorVendndodhjen()` thërret API-në vetëm pas klikimit; `kurDeshtonLeximi()` trajton refuzimin dhe timeout-in; `konfirmo()` vendos emrin e shkruar në state-in lokal. `aplikacioni/app/java-08-test/page.tsx` shfaq komponentin me të dhëna fiktive dhe aktivizon simulimin.
+`aplikacioni/components/Vendtakimi.tsx`: `konfirmo()` lexon fushën, heq hapësirat në skaje dhe vendos vlerën në state-in lokal; `kurDeshtonLeximi()` trajton timeout-in. `aplikacioni/app/java-08-test/page.tsx` shfaq komponentin me të dhëna fiktive dhe aktivizon butonin e simulimit.
 
 ### Çfarë kuptova ose korrigjova
 
-E ndava kontrollin statik nga prova ndërvepruese: ngarkimi i faqes dhe kodi tregojnë se leja nuk kërkohet vetvetiu, por pranimi/refuzimi dhe timeout-i duhet të provohen duke klikuar në shfletues real. Koordinatat nuk janë emër vendi dhe nuk dërgohen nga ky komponent; vendtakimi manual mbetet zgjedhja e qartë e përdoruesit.
+Konfirmova se vendtakimi manual ruhet në ekran pas klikimit dhe se simulimi i timeout-it jep udhëzim për provë sërish ose shkrim manual. Kjo provë nuk aktivizoi lejen e vendndodhjes, prandaj nuk tregon sjelljen e GPS-it dhe as refuzimin real të lejes. Koordinatat nuk janë emër vendi; përdoruesi duhet ta shkruajë emrin veçmas.
 
 ## Privatësia dhe kufizimet
 
