@@ -1,36 +1,26 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# RideShare
 
-## Getting Started
+Aplikacion Next.js me Neon PostgreSQL dhe hyrje GitHub.
 
-First, run the development server:
+## Nisja
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+1. Konfiguro `DATABASE_URL`, `NEXTAUTH_URL`, `NEXTAUTH_SECRET`, `GITHUB_ID` dhe `GITHUB_SECRET` në `.env.local` (mos e publiko këtë skedar).
+2. Në Neon ekzekuto `schema.sql`, pastaj migrimet e javëve të mëparshme sipas rendit, përfshirë `schema-java05.sql`.
+3. Ekzekuto `schema-java10.sql` në Neon SQL Editor.
+4. Sigurohu që llogaria e shoferit ka rolin `shofer` dhe që `udhetimet.shofer_id` tregon ID-në e saj GitHub. Llogaria tjetër mbetet `udhetar`.
+5. `npm install` dhe `npm run dev`; të dy llogaritë hapin të njëjtin URL `/udhetimi/{id}` në sesione të ndara.
+
+Për ta lidhur një llogari ekzistuese me udhëtimin e provës, zëvendëso `GITHUB_ID_SHOFER` me ID numerike të GitHub-it të shoferit dhe ekzekuto në Neon:
+
+```sql
+UPDATE profilet SET roli = 'shofer' WHERE github_id = 'GITHUB_ID_SHOFER';
+UPDATE udhetimet SET shofer_id = 'GITHUB_ID_SHOFER' WHERE id = '1';
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Udhëtimi `1` ka dy vende në të dhënat fillestare. Llogaria e dytë duhet të ketë rolin `udhetar`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Java 10
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Kërkesat ruhen në `kerkesa_vendet`; serveri merr identitetin nga sesioni. API-ja e gjendjes nuk ruan cache dhe kthen vetëm kërkesat që i përkasin udhëtarit ose shoferit pronar. Faqja rilexon gjendjen çdo 5 sekonda, ruan pamjen e fundit kur leximi dështon dhe rilexon pas rikthimit online.
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Pranimi zbatohet nga funksioni PostgreSQL `prano_kerkese_vendi`, që kontrollon pronësinë dhe ndryshon statusin/vendet në një transaksion. Ekzekuto testet me dy llogari dhe regjistro vëzhgimet te `../java-10.md`.

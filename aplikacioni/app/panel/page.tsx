@@ -73,7 +73,6 @@ export default async function Panel({
         <p>Si udhëtar mund të shohësh udhëtimet; nuk mund të ndryshosh orën e shoferit.</p>
       ) : null}
       <p><Link href="/">Kthehu te udhëtimet</Link></p>
-      <p>Kërkesa për vend mbetet simulim këtë javë.</p>
     </main>
   );
 }
