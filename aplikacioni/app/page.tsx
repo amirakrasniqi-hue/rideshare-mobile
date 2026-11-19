@@ -2,7 +2,8 @@ import Link from "next/link";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import Hyrja from "@/components/Hyrja";
-import { KartaUdhetimi } from "@/components/KartaUdhetimi";
+import ListaMePreferime from "@/components/ListaMePreferime";
+import { lexoPreferimet } from "@/lib/preferimet";
 import { lexoUdhetimet, type Udhetim } from "@/lib/udhetimet";
 
 export const dynamic = "force-dynamic";
@@ -10,9 +11,13 @@ export const dynamic = "force-dynamic";
 export default async function Home() {
   const session = await getServerSession(authOptions);
   let udhetimet: Udhetim[];
+  let preferimet: { ids: string[]; count: number; canSave: boolean } = {
+    ids: [], count: 0, canSave: false,
+  };
 
   try {
     udhetimet = await lexoUdhetimet();
+    if (session) preferimet = await lexoPreferimet();
   } catch {
     return (
       <main>
@@ -38,11 +43,8 @@ export default async function Home() {
       {udhetimet.length === 0 ? (
         <p>Nuk ka udhëtime për momentin.</p>
       ) : (
-        <div className="trip-list">
-          {udhetimet.map((udhetim) => (
-            <KartaUdhetimi key={udhetim.id} udhetim={udhetim} />
-          ))}
-        </div>
+        <ListaMePreferime udhetimet={udhetimet}
+          preferimetFillestare={preferimet.ids} canSave={preferimet.canSave} />
       )}
     </main>
   );
